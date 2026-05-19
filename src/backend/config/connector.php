@@ -1,5 +1,5 @@
 <?php
-    require_once __DIR__ . "/config.php"
+    require_once __DIR__ . "/config.php";
 
     try{
         # create PDO instance
@@ -11,4 +11,5 @@
     } catch (PDOException $e) {
         # handle connection error
         die("Database connection failed: " . $e->getMessage());
+    }
 ?>
