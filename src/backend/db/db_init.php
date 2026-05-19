@@ -1,5 +1,5 @@
 <?php
-    require_once __DIR__ . "/../config/config.php"
+    require_once __DIR__ . "/../config/connector.php"
 
     # connect to MariaDB then create database
     $conn = new mysqli($host, $user, $password);
