@@ -2,7 +2,7 @@
 
 // centralized credentials
 $host = "localhost";
-$dbname = "upcart";
+$dbname = "upcart_db";
 $user = "root";
 $password = "";
 

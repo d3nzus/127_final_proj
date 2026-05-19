@@ -1,5 +1,5 @@
 <?php
-    require_once __DIR__ . "/../config/connector.php"
+    require_once __DIR__ . "/../config/config.php";
 
     # connect to MariaDB then create database
     $conn = new mysqli($host, $user, $password);
@@ -8,7 +8,7 @@
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql_   db = "CREATE DATABASE IF NOT EXISTS `$dbname`";
+    $sql_db = "CREATE DATABASE IF NOT EXISTS `$dbname`";
 
     if ($conn->query($sql_db) === TRUE) {
         echo "Database ready successfully";
