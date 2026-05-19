@@ -13,9 +13,9 @@
     $categories = [];
 
     while ($row = $result->fetch_assoc()) {
-        $category[] = $row;
-}
+        $categories[] = $row;
+    }
 
-echo json_encode($category);
+    echo json_encode($categories);
 
 ?>
