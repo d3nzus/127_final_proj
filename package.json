@@ -1,0 +1,30 @@
+{
+  "name": "127_final_proj",
+  "version": "1.0.0",
+  "description": "Made in compliance with CMSC 127 - Database Management Systems",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/d3nzus/127_final_proj.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/d3nzus/127_final_proj/issues"
+  },
+  "homepage": "https://github.com/d3nzus/127_final_proj#readme",
+  "dependencies": {
+    "next": "^16.2.6",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
+  }
+}
