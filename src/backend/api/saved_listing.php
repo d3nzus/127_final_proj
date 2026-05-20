@@ -3,19 +3,13 @@
 
     header("Content-Type: application/json");
 
-    require_once("../config/config.php");
-
-    $conn = new mysqli($host, $user, $password, $dbname);
+    global $conn;
 
     $sql = "SELECT * FROM saved_listing";
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $saved_listings = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $saved_listings = [];
-
-    while ($row = $result->fetch_assoc()) {
-        $saved_listings[] = $row;
-}
-
-echo json_encode($saved_listings);
+    echo json_encode($saved_listings);
 
 ?>

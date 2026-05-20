@@ -3,19 +3,12 @@
 
     header("Content-Type: application/json");
 
-    require_once("../config/config.php");
-
-    $conn = new mysqli($host, $user, $password, $dbname);
+    global $conn;
 
     $sql = "SELECT * FROM notification";
-    $result = $conn->query($sql);
-
-    $notifications = [];
-
-    while ($row = $result->fetch_assoc()) {
-        $notifications[] = $row;
-}
-
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $notifications = $stmt->fetchAll(PDO::FETCH_ASSOC);
 echo json_encode($notifications);
 
 ?>

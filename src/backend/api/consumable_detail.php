@@ -3,19 +3,13 @@
 
     header("Content-Type: application/json");
 
-    require_once("../config/config.php");
-
-    $conn = new mysqli($host, $user, $password, $dbname);
+    global $conn;
 
     $sql = "SELECT * FROM consumable_detail";
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $consumable_details = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $consumable_details = [];
-
-    while ($row = $result->fetch_assoc()) {
-        $consumable_details[] = $row;
-}
-
-echo json_encode($consumable_details);
+    echo json_encode($consumable_details);
 
 ?>

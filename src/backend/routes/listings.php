@@ -4,17 +4,26 @@
 // Base path: /api/listings  and  /api/categories
 // ============================================================
 
-require_once __DIR__ . "/../controllers/listingController.php";
+require_once __DIR__ . "/../controller/listingController.php";
 
 header("Content-Type: application/json");
 
 $method = $_SERVER["REQUEST_METHOD"];
 $uri = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+$script = $_SERVER["SCRIPT_NAME"] ?? "";
+
+if ($script && str_starts_with($uri, $script)) {
+    $uri = substr($uri, strlen($script));
+    if ($uri === false || $uri === "") {
+        $uri = "/";
+    }
+}
+
 $segments = explode("/", trim($uri, "/"));
 
 $base = $segments[1] ?? "";   // "listings" or "categories"
-$param = $segments[2] ?? "";   // id | "mine" | "saved" | ""
-$subAction = $segments[3] ?? "";  // "save" | ""
+$param = $segments[2] ?? "";
+$subAction = $segments[3] ?? "";
 
 // categories
 if ($base === "categories") {

@@ -4,18 +4,27 @@
 // Base path: /api/moderator
 // ============================================================
 
-require_once __DIR__ . "/../controllers/moderatorController.php";
+require_once __DIR__ . "/../controller/moderatorController.php";
 
 header("Content-Type: application/json");
 
 $method = $_SERVER["REQUEST_METHOD"];
 $uri = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+$script = $_SERVER["SCRIPT_NAME"] ?? "";
+
+if ($script && str_starts_with($uri, $script)) {
+    $uri = substr($uri, strlen($script));
+    if ($uri === false || $uri === "") {
+        $uri = "/";
+    }
+}
+
 $segments = explode("/", trim($uri, "/"));
 
 
-$resource = $segments[2] ?? "";   // dashboard | listings | reports | users
-$param = $segments[3] ?? "";   // numeric id | "pending" | ""
-$subAction = $segments[4] ?? "";   // approve | reject | edit | warn | suspend | reinstate | ""
+$resource = $segments[1] ?? "";   // dashboard | listings | reports | users
+$param = $segments[2] ?? "";   // numeric id | "pending" | ""
+$subAction = $segments[3] ?? "";   // approve | reject | edit | warn | suspend | reinstate | ""
 
 match (true) {
 

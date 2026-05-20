@@ -3,12 +3,21 @@
 // transactions.php  —  Transaction & Report Routes
 // ============================================================
 
-require_once __DIR__ . "/../controllers/transactionController.php";
+require_once __DIR__ . "/../controller/transactionController.php";
 
 header("Content-Type: application/json");
 
 $method = $_SERVER["REQUEST_METHOD"];
 $uri = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+$script = $_SERVER["SCRIPT_NAME"] ?? "";
+
+if ($script && str_starts_with($uri, $script)) {
+    $uri = substr($uri, strlen($script));
+    if ($uri === false || $uri === "") {
+        $uri = "/";
+    }
+}
+
 $segments = explode("/", trim($uri, "/"));
 
 

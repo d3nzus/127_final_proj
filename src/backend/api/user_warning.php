@@ -3,19 +3,13 @@
 
     header("Content-Type: application/json");
 
-    require_once("../config/config.php");
-
-    $conn = new mysqli($host, $user, $password, $dbname);
+    global $conn;
 
     $sql = "SELECT * FROM user_warning";
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $user_warnings = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $user_warnings = [];
-
-    while ($row = $result->fetch_assoc()) {
-        $user_warnings[] = $row;
-}
-
-echo json_encode($user_warnings);
+    echo json_encode($user_warnings);
 
 ?>

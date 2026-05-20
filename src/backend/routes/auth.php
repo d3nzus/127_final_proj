@@ -4,7 +4,7 @@
 // Base path: /api/auth
 // ============================================================
 
-require_once __DIR__ . "/../controllers/authController.php";
+require_once __DIR__ . "/../controller/authController.php";
 
 header("Content-Type: application/json");
 
@@ -12,10 +12,19 @@ $method = $_SERVER["REQUEST_METHOD"];
 
 // Parse the last path segment after /api/auth/
 $uri = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+$script = $_SERVER["SCRIPT_NAME"] ?? "";
+
+if ($script && str_starts_with($uri, $script)) {
+    $uri = substr($uri, strlen($script));
+    if ($uri === false || $uri === "") {
+        $uri = "/";
+    }
+}
+
 $segments = explode("/", trim($uri, "/"));
 
 
-$action = $segments[2] ?? "";
+$action = $segments[1] ?? "";
 
 match (true) {
     // POST /api/auth/register

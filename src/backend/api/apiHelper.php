@@ -4,6 +4,8 @@ function api_include_json($scriptPath) {
     if (!is_file($scriptPath)) {
         return null;
     }
+    global $conn;
+    
 
     $cwd = getcwd();
     chdir(dirname($scriptPath));
